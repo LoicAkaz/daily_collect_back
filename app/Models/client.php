@@ -14,6 +14,7 @@ class client extends Model
     protected $keyType = 'string';
     public $timestamps = true;
 
+
     protected $filable = [
         'id_client',
         'nom_client',
