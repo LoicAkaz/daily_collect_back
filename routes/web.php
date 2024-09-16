@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\api\clientController;
+use App\Http\Controllers\api\transactionController;
 use App\Http\Controllers\api\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,4 +10,6 @@ Route::get('/', function () {
 });
 
 Route::apiResource("user", userController::class);
+Route::apiResource("transaction", transactionController::class);
+Route::apiResource("client", clientController::class);
 
