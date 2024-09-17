@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -169,4 +169,9 @@
             </div>
         </div>
     </body>
-</html>
+</html> --}}
+
+@extends("template")
+@section("content")
+    <h1>Bienvenue sur Daily_collect</h1>
+@endsection
