@@ -6,16 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <title>Daily_collect</title>
 </head>
 <body class="container">
-    @if(Session::has('message'))
-     toastr.success('{{Session::get('message')}}');
-    @endif
-    @if(Session::has('Error'))
-     toastr.success('{{Session::get('Error')}}');
-    @endif
+    <script>
+        @isset($message)
+     toastr.success("{{$message}}");
+    @endisset
+    @isset($Error)
+     toastr.error("{{ $Error}}");
+    @endisset
+    </script>
     {{-- @if($Error)
 
         <div class="alert alert-danger" role="alert">
@@ -49,8 +52,8 @@
                   Client
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">List</a></li>
-                  <li><a class="dropdown-item" href="#">Add</a></li>
+                  <li><a class="dropdown-item" href="/client.list">List</a></li>
+                  <li><a class="dropdown-item" href="/client.add">Add</a></li>
                   {{-- <li><hr class="dropdown-divider"></li> --}}
                   {{-- <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
                 </ul>
@@ -83,5 +86,6 @@
             <p>&copy; Copyright 2023 Daily_Collect</p>
         </footer>
       </div>
+      <script src="{{ asset('utils.js') }}"></script>
 </body>
 </html>

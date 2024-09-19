@@ -12,7 +12,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'users';
-    protected $primarykey = 'id_user';
+    protected $primaryKey = 'id_user';
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = true;

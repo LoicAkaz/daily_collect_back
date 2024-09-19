@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\resources;
+namespace App\Http\Controllers\resource;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -41,7 +41,8 @@ class userController extends Controller
         try {
             $user = User::create(array_merge($request->all(), ["id_user" => $this ->generateID()]));
             $message = "User created successfully.";
-            return redirect()->back()->with(compact("message"));
+            $users =  User::all();
+            return view("user.user", compact("users"))->with("message",$message);
         } catch (\Throwable $th) {
 
             return view('user.user', compact(["users"]))->with(["Error"=>"Registration error".$th]);
@@ -89,11 +90,12 @@ class userController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(string $id)
     {
-        $user_to_del = User::findOrFail($user->id_user);
+        $user_to_del = User::findOrFail($id);
         $user_to_del->delete();
-        return response()->json(['message' => 'User deleted successfully'],200);
+        $users =  User::all();
+        return view("user.user", compact("users"))->with("message","User");
     }
 
     function generateID()

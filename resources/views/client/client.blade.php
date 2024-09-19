@@ -1,33 +1,35 @@
 @extends('template')
-@include('user.addUser')
+@include('client.addClient')
 @section("content")
 <center>
     <div class="card m -auto" style = "width: 90%;margin-top:20px; clear:both">
         <div class="card-body">
             <div class="row">
                 <h5 class="card-title col-10">Liste des utilisateurs</h5>
-                <button href="" class="btn btn-outline-primary col-2" data-bs-toggle="modal" data-bs-target="#createUserModal"> Ajouter </button>
+                <button href="" class="btn btn-outline-primary col-2" data-bs-toggle="modal" data-bs-target="#createClientModal"> Ajouter </button>
             </div>
             <table class="table table-stripped">
                 <thead>
                     <th scope="col">Nom</th>
                     <th scope="col">Prenom</th>
                     <th scope="col">Téléphone</th>
-                    <th scope="col">Sexe</th>
+                    <th scope="col">Cni</th>
+                    <th scope="col">adresse</th>
                     <th scope="col">Age</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">photo</th>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($clients as $client)
                         <tr>
-                            <td>{{$user->id_user}}</td>
-                            <td>{{$user->nom}}</td>
-                            <td>{{$user->prenom}}</td>
-                            <td>{{$user->telephone}}</td>
-                            <td>{{$user->sexe}}</td>
-                            <td>{{$user->age}}</td>
-                            <td>{{$user->username}}</td>
+                            <td>{{$client->id_client}}</td>
+                            <td>{{$client->nom_client}}</td>
+                            <td>{{$client->prenom_client}}</td>
+                            <td>{{$client->telephone_client}}</td>
+                            <td>{{$client->sexe_client}}</td>
+                            <td>{{$client->age}}</td>
+                            <td>{{$client->addresse_client}}</td>
+                            <td><img src="{{asset('storage/'.$client->photo_client)}}" alt="" width=""/></td>
+                            <td>{{$client->username}}</td>
                             <td class="text-center">
                                 <button class=" btn btn-outline-secondary">
                                     <i class="bi bi-pencil"></i>

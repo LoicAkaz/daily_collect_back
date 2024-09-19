@@ -1,11 +1,11 @@
-<div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="createClientModal" tabindex="-1" aria-labelledby="createClientModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <h5 class="modal-title" style="color: white">Ajouter un utilisateur</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="/user.store" method="POST">
+        <form action="/client.store" method="POST" enctype="multipart/form-data">
             {{-- @csrf --}}
             <meta name="csrf-token" content="{{ csrf_token() }}">
             <div class="modal-body">
@@ -13,19 +13,19 @@
                 {{-- formulaire contenant le nom, le prenom, le sexe, l'age, le username et le password, et le telephone --}}
                     <div class="mb-3">
                       <label for="nom" class="form-label" required>Nom</label>
-                      <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez votre nom">
+                      <input type="text" class="form-control" id="nom" name="nom_client" placeholder="Entrez votre nom">
                     </div>
                     <div class="mb-3">
                       <label for="prenom" class="form-label">Prénom</label>
-                      <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Entrez votre prénom">
+                      <input type="text" class="form-control" id="prenom" name="prenom_client" placeholder="Entrez votre prénom">
                     </div>
                     <div class="mb-3">
                         <label for="prenom" class="form-label">Téléphone</label>
-                        <input type="text" class="form-control" id="telephone" name="telephone" required placeholder="Entrez votre numero de telephone">
+                        <input type="text" class="form-control" id="telephone" name="telephone_client" required placeholder="Entrez votre numero de telephone">
                       </div>
                     <div class="mb-3">
                       <label for="sexe" class="form-label" required>Sexe</label>
-                      <select class="form-select" id="sexe" name="sexe">
+                      <select class="form-select" id="sexe" name="sexe_client">
                         <option value="">Sélectionnez votre sexe</option>
                         <option value="M">Masculin</option>
                         <option value="F">Féminin</option>
@@ -36,12 +36,12 @@
                       <input type="number" class="form-control" id="age" name="age" placeholder="Entrez votre âge" min="10" max="100">
                     </div>
                     <div class="mb-3">
-                      <label for="username" class="form-label" required>Username</label>
-                      <input type="text" class="form-control" id="username" name="username" placeholder="Entrez votre username">
+                      <label for="addresse" class="form-label" required>Addresse</label>
+                      <input type="text" class="form-control" id="addresse_client" name="addresse_client" placeholder="Entrez votre username">
                     </div>
                     <div class="mb-3">
-                      <label for="password" class="form-label" required>Mot de passe</label>
-                      <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe">
+                      <label for="cni" class="form-label" required> Numéro de Cni</label>
+                      <input type="text" class="form-control" id="cni_client" name="cni_client" placeholder="Entrez votre mot de passe">
                     </div>
 
               </div>
@@ -56,19 +56,19 @@
     </div>
   </div>
 
-  <div div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+  <div div class="modal fade" id="deleteClientModal" tabindex="-1" aria-labelledby="deleteClientModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Supprimer un utilisateur</h5>
+          <h5 class="modal-title">Supprimer un client</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Voulez-vous vraiment supprimer cet utilisateur ?</p>
+          <p>Voulez-vous vraiment supprimer ce client ?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" data-bs-dismiss="modal">Non</button>
-          <a href="" type="button" class="btn btn-danger" id="confirmDeleteUser">Oui</a>
+          <a href="" type="button" class="btn btn-danger" id="confirmClientUser">Oui</a>
         </div>
       </div>
     </div>
