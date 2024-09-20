@@ -29,9 +29,9 @@
                             <td>{{$user->age}}</td>
                             <td>{{$user->username}}</td>
                             <td class="text-center">
-                                <button class=" btn btn-outline-secondary">
+                                <a href="/user.update_form/{{$user->id_user}}" class=" btn btn-outline-secondary">
                                     <i class="bi bi-pencil"></i>
-                                </button>
+                                </a>
                                 <button data-bs-target="#deleteUserModal" data-bs-toggle="modal" data-id="{{$user->id_user}}" class=" btn btn-outline-danger">
                                     <i class="bi bi-x"></i>
                                 </button>

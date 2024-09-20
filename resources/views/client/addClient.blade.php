@@ -43,6 +43,10 @@
                       <label for="cni" class="form-label" required> Numéro de Cni</label>
                       <input type="text" class="form-control" id="cni_client" name="cni_client" placeholder="Entrez votre mot de passe">
                     </div>
+                    <div class="mb-3">
+                        {{-- <label for="sexe" class="form-label" required >utilisateur</label> --}}
+                        <input type="text" value="U498R" id="id_user" name="id_user" hidden>
+                      </div>
 
               </div>
 
@@ -68,7 +72,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" data-bs-dismiss="modal">Non</button>
-          <a href="" type="button" class="btn btn-danger" id="confirmClientUser">Oui</a>
+          <a href="" type="button" class="btn btn-danger" id="confirmDeleteClient">Oui</a>
         </div>
       </div>
     </div>

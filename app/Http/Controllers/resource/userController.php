@@ -20,6 +20,16 @@ class userController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     */
+    public function create(string $id)
+    {
+        $user = User::findOrFail($id);
+        return view("user.updateUser", compact('user'));
+    }
+
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -63,26 +73,31 @@ class userController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request,string $id)
     {
         $validatedData = Validator::make($request->all(), [
-
             'nom' => 'required|string|max:255',
             'sexe' => 'required|string|max:1',
             'age' => 'required|integer|max:100',
-            'telephone' => 'required|string||max:15|unique:users',
-            'username' => 'required|string||max:15|unique:users',
+            'telephone' => 'required|string||max:15',
+            'username' => 'required|string||max:15',
             'password' => 'required|string||min:8',
+
         ]);
+        $users =  User::all();
         if($validatedData->fails()){
-            return response()->json($validatedData->errors()->all(), 400);
+            return view('user.user', compact("users"))->with(["Error"=>"Form not well filled"]);
         }
+
         try {
-            $new_user = User :: findOrFail($user->id_user);
-            $new_user->update($request->all());
-            return view('user.updateUser', $new_user);
+            $user_to_update = User::find($id);
+            $user_to_update->update($request->all());
+            $message = "User updated successfully.";
+            $users =  User::all();
+            return view("user.user", compact("users"))->with("message",$message);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Error while updating user'],500);
+
+            return view('user.user', compact(["users"]))->with(["Error"=>"Registration error".$th]);
         }
 
     }

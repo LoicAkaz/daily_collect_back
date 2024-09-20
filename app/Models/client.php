@@ -9,13 +9,13 @@ class Client extends Model
 {
     use HasFactory;
     protected $table = 'client';
-    protected $primarykey = 'id_client';
+    protected $primaryKey = 'id_client';
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = true;
 
 
-    protected $filable = [
+    protected $fillable = [
         'id_client',
         'nom_client',
         'prenom_client',
