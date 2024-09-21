@@ -63,7 +63,7 @@
                   Transaction
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">List</a></li>
+                  <li><a class="dropdown-item" href="/transaction.list">List</a></li>
                   <li><a class="dropdown-item" href="#">Add</a></li>
                   {{-- <li><hr class="dropdown-divider"></li> --}}
                   {{-- <li><a class="dropdown-item" href="#">Something else here</a></li> --}}

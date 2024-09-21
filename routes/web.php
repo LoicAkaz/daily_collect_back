@@ -28,6 +28,12 @@ Route::get("/client.delete/{id}", [ResourceClient::class, "destroy"]);
 Route::get("/client.update_form/{id}", [ResourceClient::class, "create"]);
 Route::post("/client.update/{id}", [ResourceClient::class, "update"]);
 
+Route::get("/transaction.list", [ResourceTransaction::class, 'index']);
+Route::post("/transaction.store", [ResourceTransaction::class, 'store']);
+Route::get("/transaction.delete/{id}", [ResourceTransaction::class, "destroy"]);
+Route::get("/transaction.update_form/{id}", [ResourceTransaction::class, "create"]);
+Route::post("/transaction.update/{id}", [ResourceTransaction::class, "update"]);
+
 // Route::get('/usersView',[userController::class,'index'])->name('user.index');
 
 // Route::controller( userController::class)->group(function (){
