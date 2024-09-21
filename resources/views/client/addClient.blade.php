@@ -47,6 +47,10 @@
                         {{-- <label for="sexe" class="form-label" required >utilisateur</label> --}}
                         <input type="text" value="U498R" id="id_user" name="id_user" hidden>
                       </div>
+                      <div class="mb-3">
+                        <label for="photo" class="form-label" required> Photo de profil</label>
+                        <input type="file" class="form-control" id="photo_client" name="photo_client" placeholder="upload your photo">
+                      </div>
 
               </div>
 

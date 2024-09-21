@@ -38,14 +38,10 @@
               <label for="cni" class="form-label" required> Numéro de Cni</label>
               <input type="text" class="form-control" id="cni_client" name="cni_client" value="{{$client->cni_client}}" placeholder="Entrez votre mot de passe">
             </div>
-            <div class="mb-3">
-                <label for="sexe" class="form-label" required>utilisateur</label>
-                <select class="form-select" id="id_user" name="id_user">
-                  <option value="">Sélectionnez l'utilisateur</option>
-
-                </select>
+              <div class="mb-3">
+                <label for="photo" class="form-label" required> Photo de profil</label>
+                <input type="file" class="form-control" id="photo_client" name="photo_client">
               </div>
-
       </div>
 
 <div class="container" style="width: 70%">

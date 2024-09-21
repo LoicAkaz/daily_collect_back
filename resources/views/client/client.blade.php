@@ -31,7 +31,7 @@
                             <td>{{$client->age}}</td>
                             <td>{{$client->cni_client}}</td>
                             <td>{{$client->addresse_client}}</td>
-                            <td><img src="{{asset('storage/'.$client->photo_client)}}" alt="" width=""/></td>
+                            <td><img src="{{asset('/storage/profils/'.$client->photo_client)}}" alt="photo" width="50px"/></td>
                             <td class="text-center">
                                 <a href="/client.update_form/{{$client->id_client}}" class=" btn btn-outline-secondary">
                                     <i class="bi bi-pencil"></i>

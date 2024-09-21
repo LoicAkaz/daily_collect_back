@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -24,12 +25,26 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'id_user' => $this->generateID(),
+            'nom' => fake()->name(),
+            'prenom' => fake()->firstName(),
+            'age' => rand(10,100),
+            'sexe' => "M",
+            'username' => fake()->name(),
+            'telephone' => Str::substr(fake()->unique()->phoneNumber(), 0, 10),
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            // 'remember_token' => Str::random(10),
         ];
+    }
+
+    function generateID()
+{
+        $id = 'U'.rand(100,999999).'R';
+        $user= User::where('id_user', $id)->first();
+        if($user){
+            return $this->generateID();
+        }
+        return $id;
     }
 
     /**

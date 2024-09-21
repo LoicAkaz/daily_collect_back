@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\client;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator as Validator;
+use League\CommonMark\Node\Block\Document;
 
 class clientController extends Controller
 {
@@ -50,10 +52,23 @@ class clientController extends Controller
         }
 
         try {
-            $client = client::create(array_merge($request->all(), ["id_client" => $this ->generateID()]));
+            $photofile = $request->file('photo_client');
+
+            $client = client::create(array_merge($request->all(), ["id_client" => $this ->generateID(),
+             "photo_client"=>trim($request->nom_client)."_".$request->prenom_client.".".$photofile ->extension()]));
+             $document_extension = ["jpg", "png"];
+             if($client){
+                $path = "public/profils";
+                if(!Storage::exists($path)){
+                    Storage::makeDirectory($path,0777,true);
+                }
+                if (($photofile != null)&&(in_array($photofile->extension(), $document_extension))) {
+                    $photofile->storeAs($path, "{$request->nom_client}_{$request->prenom_client}.{$photofile->extension()}");
+                }
+             }
             $message = "client created successfully.";
             $clients =  client::all();
-            $users = User::all();  
+            $users = User::all();
             return view("client.client", compact(["clients", 'users']))->with("message",$message);
         } catch (\Throwable $th) {
 
@@ -87,8 +102,8 @@ class clientController extends Controller
             'nom_client' => 'required|string|max:255',
             'sexe_client' => 'required|string|max:1',
             'age' => 'required|integer|max:100',
-            'cni_client' => 'required|string||max:20|unique:client',
-            'telephone_client' => 'required|string||max:15|unique:client',
+            'cni_client' => 'required|string||max:20',
+            'telephone_client' => 'required|string||max:15',
             'addresse_client' => 'required|string||max:100',
 
         ]);
@@ -99,8 +114,25 @@ class clientController extends Controller
         }
 
         try {
-            $client_to_update = client::find($id);
-            $client_to_update->update($request->all());
+
+            $client_to_update = client::findOrFail($id);
+            $photofile = $request->file('photo_client');
+             $document_extension = ["jpg", "png"];
+             if($photofile){
+                $path = "/public/profils/".$client_to_update->photo_client;
+                if(Storage::exists($path)){
+                    Storage::delete($path);
+                }
+             }
+             if($client_to_update){
+                $path = "public/profils";
+
+                if (($photofile != null)&&(in_array($photofile->extension(), $document_extension))) {
+                    $photofile->storeAs($path, "{$request->nom_client}_{$request->prenom_client}.{$photofile->extension()}");
+                }
+             }
+            $client_to_update->update(array_merge($request->all(), [
+            "photo_client"=>trim($request->nom_client)."_".$request->prenom_client.".".$photofile ->extension()]));
             $message = "client updated successfully.";
             $clients =  client::all();
             $users = User::all();
@@ -118,6 +150,10 @@ class clientController extends Controller
     {
         $client_to_del = client::findOrFail($id);
         $client_to_del->delete();
+        $path = "/public/profils/".$client_to_del->photo_client;
+        if(Storage::exists($path)){
+            Storage::delete($path);
+        }
         $clients =  client::all();
         $users =  User::all();
         return view("client.client", compact(["clients", "users"]))->with("message","client successfully deleted");
